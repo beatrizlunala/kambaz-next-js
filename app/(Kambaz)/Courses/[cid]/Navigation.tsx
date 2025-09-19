@@ -17,7 +17,10 @@ export default function CourseNavigation() {
         Piazza
       </Link>
       <br />
-      <Link href="/Courses/1234/Zoom" id="wd-course-zoom-link">
+      <Link
+        href="https://northeastern.instructure.com/courses/225902/external_tools/35048"
+        id="wd-course-zoom-link"
+      >
         Zoom
       </Link>
       <br />

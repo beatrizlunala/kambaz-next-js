@@ -23,7 +23,7 @@ export default function TOC() {
         </Link>
       </li>
       <li>
-        <Link href="/Kambaz" id="wd-lab3-link">
+        <Link href="/" id="wd-kambaz-link">
           Kambaz
         </Link>
       </li>

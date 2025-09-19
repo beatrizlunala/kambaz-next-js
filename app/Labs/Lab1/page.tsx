@@ -15,18 +15,18 @@ export default function Lab1() {
           <input
             type="password"
             id="wd-text-fields-password"
-            value="123@#$asd"
+            defaultValue="123@#$asd"
           />
           <br />
           <label htmlFor="wd-text-fields-first-name">First name:</label>
-          <input type="text" id="wd-text-fields-first-name" title="John" />{" "}
+          <input type="text" id="wd-text-fields-first-name" title="John" />
           <br />
           <label htmlFor="wd-text-fields-last-name">Last name:</label>
           <input
-            type="text"
+            type="textarea"
             id="wd-text-fields-last-name"
             placeholder="Doe"
-            value="Wonderland"
+            defaultValue="Wonderland"
             title="The last name"
           />
           {/* copy rest of form elements here  */}
@@ -79,9 +79,7 @@ export default function Lab1() {
       <select id="wd-select-one-genre">
         <option value="COMEDY">Comedy</option>
         <option value="DRAMA">Drama</option>
-        <option selected value="SCIFI">
-          Science Fiction
-        </option>
+        <option defaultValue="SCIFI">Science Fiction</option>
         <option value="FANTASY">Fantasy</option>
       </select>
 

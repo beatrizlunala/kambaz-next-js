@@ -11,21 +11,17 @@ export default function Dashboard() {
             <Image src="/images/reactjs.png" alt="" width={200} height={150} />
             <div>
               <h5> CS1234 React JS </h5>
-              <p className="wd-dashboard-course-title">
-                Full Stack software developer
-              </p>
+              <p className="wd-dashboard-course-title">React Fundamentals</p>
               <button> Go </button>
             </div>
           </Link>
         </div>
         <div className="wd-dashboard-course">
           <Link href="/Courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/reactjs.png" alt="" width={200} height={150} />
+            <Image src="/images/socl3456.png" alt="" width={200} height={150} />
             <div>
-              <h5> CS1234 React JS </h5>
-              <p className="wd-dashboard-course-title">
-                Full Stack software developer
-              </p>
+              <h5> SOCL3456 </h5>
+              <p className="wd-dashboard-course-title">Advanced Sociology</p>
               <button> Go </button>
             </div>
           </Link>{" "}

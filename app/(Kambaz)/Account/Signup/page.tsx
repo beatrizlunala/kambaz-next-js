@@ -10,12 +10,12 @@ export default function Signup() {
       <input
         placeholder="verify password"
         type="password"
-        className="wd-password-verify"
+        className="wdd-password-verify"
       />
       <br />
-      <Link href="Profile"> Sign up </Link>
+      <Link href="Profile">Sign up</Link>
       <br />
-      <Link href="Signin"> Sign in </Link>
+      <Link href="Signin">Sign in</Link>
     </div>
   );
 }

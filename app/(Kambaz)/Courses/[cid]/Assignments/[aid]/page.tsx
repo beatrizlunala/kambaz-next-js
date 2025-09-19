@@ -5,13 +5,14 @@ export default function AssignmentEditor() {
       <input id="wd-name" defaultValue="A1 - ENV + HTML" />
       <br />
       <br />
-      <textarea id="wd-description">
-        The assignment is available online Submit a link to the landing page of
+      <textarea
+        id="wd-description"
+        value="The assignment is available online Submit a link to the landing page of
         your Web application running on Netlify. THe landing page should include
         of the following: Your full name and section Links to each of the lab
         assignments Link to all relevant source code repositories The Kambas
-        application should include a link to navigate back to the landing page.
-      </textarea>
+        application should include a link to navigate back to the landing page"
+      ></textarea>
       <br />
       <table>
         <tr>
@@ -55,41 +56,37 @@ export default function AssignmentEditor() {
               <input
                 type="checkbox"
                 name="wd-submission-type"
-                id="wd-checkbox-textentry"
+                id="wd-text-entry"
               />
-              <label htmlFor="wd-checkbox-textentry">Text Entry</label>
+              <label htmlFor="wd-text-entry">Text Entry</label>
               <br />
               <input
                 type="checkbox"
                 name="wd-submission-type"
                 id="wd-checkbox-websiteurl"
               />
-              <label htmlFor="wd-checkbox-websiteurl">Website URL</label>
+              <label htmlFor="wd-website-url">Website URL</label>
               <br />
               <input
                 type="checkbox"
                 name="wd-submission-type"
-                id="wd-checkbox-mediarecordings"
+                id="wd-media-recordings"
               />
-              <label htmlFor="wd-checkbox-mediarecordings">
-                Media Recordings
-              </label>
+              <label htmlFor="wd-media-recordings">Media Recordings</label>
               <br />
               <input
                 type="checkbox"
                 name="wd-submission-type"
-                id="wd-checkbox-studentannotation"
+                id="wd-student-annotation"
               />
-              <label htmlFor="wd-checkbox-studentannotation">
-                Student Annotation
-              </label>
+              <label htmlFor="wd-student-annotation">Student Annotation</label>
               <br />
               <input
                 type="checkbox"
                 name="wd-submission-type"
-                id="wd-checkbox-fileuploads"
+                id="wd-file-upload"
               />
-              <label htmlFor="wd-checkbox-fileuploads">File Uploads</label>
+              <label htmlFor="wd-file-upload">File Upload</label>
               <br />
             </td>
           </tr>
@@ -154,7 +151,7 @@ export default function AssignmentEditor() {
       <hr></hr>
       <table width="100%">
         <tr>
-          <td></td> {/* Empty cell takes up remaining space */}
+          <td></td>
           <td align="right" valign="top">
             <button>Cancel</button>
             <button>Save</button>

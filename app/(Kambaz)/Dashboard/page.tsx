@@ -10,79 +10,77 @@ export default function Dashboard() {
           <Link href="/Courses/1234" className="wd-dashboard-course-link">
             <Image src="/images/reactjs.png" alt="" width={200} height={150} />
             <div>
-              <h5> CS1234 React JS </h5>
+              <h5> CS1234 </h5>
               <p className="wd-dashboard-course-title">React Fundamentals</p>
               <button> Go </button>
             </div>
           </Link>
         </div>
         <div className="wd-dashboard-course">
-          <Link href="/Courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/socl3456.png" alt="" width={200} height={150} />
+          <Link href="/Courses/1123" className="wd-dashboard-course-link">
+            <Image src="/images/artf1123.png" alt="" width={200} height={150} />
             <div>
-              <h5> SOCL3456 </h5>
-              <p className="wd-dashboard-course-title">Advanced Sociology</p>
+              <h5> ARTF1123 </h5>
+              <p className="wd-dashboard-course-title">Color and Composition</p>
               <button> Go </button>
             </div>
-          </Link>{" "}
+          </Link>
         </div>
         <div className="wd-dashboard-course">
-          <Link href="/Courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/reactjs.png" alt="" width={200} height={150} />
+          <Link href="/Courses/2500" className="wd-dashboard-course-link">
+            <Image src="/images/cs2500.png" alt="" width={200} height={150} />
             <div>
               <h5> CS2500 Fundamentals of Computer Science </h5>
               <p className="wd-dashboard-course-title">Java</p>
               <button> Go </button>
             </div>
-          </Link>{" "}
+          </Link>
         </div>
         <div className="wd-dashboard-course">
-          <Link href="/Courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/reactjs.png" alt="" width={200} height={150} />
+          <Link href="/Courses/2501" className="wd-dashboard-course-link">
+            <Image src="/images/cs2501.jpeg" alt="" width={200} height={150} />
             <div>
-              <h5> CS1234 React JS </h5>
+              <h5> CS2501 </h5>
               <p className="wd-dashboard-course-title">
-                Full Stack software developer
+                Lab for Fundamentals of Computer Science
               </p>
               <button> Go </button>
             </div>
-          </Link>{" "}
+          </Link>
         </div>
         <div className="wd-dashboard-course">
-          <Link href="/Courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/reactjs.png" alt="" width={200} height={150} />
+          <Link href="/Courses/1270" className="wd-dashboard-course-link">
+            <Image src="/images/artg1270.png" alt="" width={200} height={150} />
             <div>
-              <h5> CS1234 React JS </h5>
+              <h5> ARTG1270 </h5>
               <p className="wd-dashboard-course-title">
-                Full Stack software developer
+                Design Process and Practices
               </p>
               <button> Go </button>
             </div>
-          </Link>{" "}
+          </Link>
         </div>
         <div className="wd-dashboard-course">
-          <Link href="/Courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/reactjs.png" alt="" width={200} height={150} />
+          <Link href="/Courses/1271" className="wd-dashboard-course-link">
+            <Image src="/images/artg1271.png" alt="" width={200} height={150} />
             <div>
-              <h5> CS1234 React JS </h5>
+              <h5> ARTG1271 </h5>
               <p className="wd-dashboard-course-title">
-                Full Stack software developer
+                Studio for Design Process and Practices
               </p>
               <button> Go </button>
             </div>
-          </Link>{" "}
+          </Link>
         </div>
         <div className="wd-dashboard-course">
-          <Link href="/Courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/reactjs.png" alt="" width={200} height={150} />
+          <Link href="/Courses/2000" className="wd-dashboard-course-link">
+            <Image src="/images/inam2000.png" alt="" width={200} height={150} />
             <div>
-              <h5> CS1234 React JS </h5>
-              <p className="wd-dashboard-course-title">
-                Full Stack software developer
-              </p>
+              <h5> INAM2000 </h5>
+              <p className="wd-dashboard-course-title">Ethics in Creativity</p>
               <button> Go </button>
             </div>
-          </Link>{" "}
+          </Link>
         </div>
       </div>
     </div>

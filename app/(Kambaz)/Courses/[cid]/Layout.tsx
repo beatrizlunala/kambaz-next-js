@@ -4,7 +4,7 @@ export default async function CoursesLayout({
   children,
   params,
 }: Readonly<{ children: ReactNode; params: Promise<{ id: string }> }>) {
-  const { cid } = await params;
+  const { id: cid } = await params;
   return (
     <div id="wd-courses">
       <h2>Courses {cid}</h2>

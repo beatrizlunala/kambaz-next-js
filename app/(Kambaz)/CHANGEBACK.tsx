@@ -19,16 +19,3 @@ export default function KambazLayout({
     </table>
   );
 }
-
-// import { ReactNode } from "react";
-
-// export default function KambazLayout({ children }: { children: ReactNode }) {
-//   return (
-//     <div style={{ border: "2px solid red", padding: "20px" }}>
-//       <h1>LAYOUT IS WORKING!</h1>
-//       <div style={{ border: "1px solid blue", padding: "10px" }}>
-//         {children}
-//       </div>
-//     </div>
-//   );
-// }

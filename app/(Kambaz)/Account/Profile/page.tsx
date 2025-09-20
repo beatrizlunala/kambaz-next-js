@@ -4,7 +4,7 @@ export default function Profile() {
     <div id="wd-profile-screen">
       <h3>Profile</h3>
       <input
-        defaultValue="alice"
+        defaultValue="beatriz"
         placeholder="username"
         className="wd-username"
       />

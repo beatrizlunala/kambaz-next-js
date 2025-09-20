@@ -17,6 +17,7 @@ export default function AccountLayout({
           </tr>
         </tbody>
       </table>
+      <table></table>
     </div>
   );
 }

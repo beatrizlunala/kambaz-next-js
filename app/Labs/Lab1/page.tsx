@@ -178,7 +178,6 @@ export default function Lab1() {
               <td>2/10/21</td>
               <td>90</td>
             </tr>
-            <tr> ... </tr>
           </tbody>
           <tfoot>
             <tr>

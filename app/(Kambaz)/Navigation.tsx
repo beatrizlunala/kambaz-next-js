@@ -2,13 +2,7 @@ import Link from "next/link";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
-import {
-  FaInbox,
-  FaRegCircleUser,
-  FaCalendar,
-  FaGitlab,
-  FaBook,
-} from "react-icons/fa6";
+import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 export default function KambazNavigation() {
@@ -51,33 +45,33 @@ export default function KambazNavigation() {
         </Link>
       </ListGroupItem>
       <br />
-      {/* Courses  */}
+      {/* Courses */}
       <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/Courses"
           id="wd-account-link"
           className="text-white text-decoration-none"
         >
-          <FaBook className="fs-1 text-white" />
+          <LiaBookSolid className="fs-1 text-white" />
           <br />
           Courses
         </Link>
       </ListGroupItem>
 
-      {/* Calendar  */}
+      {/* Calendar */}
       <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/Calendar"
           id="wd-account-link"
           className="text-white text-decoration-none"
         >
-          <FaCalendar className="fs-1 text-white" />
+          <IoCalendarOutline className="fs-1 text-white" />
           <br />
           Calendar
         </Link>
       </ListGroupItem>
 
-      {/* Inbox  */}
+      {/* Inbox */}
       <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/Inbox"
@@ -90,14 +84,14 @@ export default function KambazNavigation() {
         </Link>
       </ListGroupItem>
 
-      {/* Labs  */}
+      {/* Labs */}
       <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/Labs"
           id="wd-account-link"
           className="text-white text-decoration-none"
         >
-          <FaGitlab className="fs-1 text-white" />
+          <LiaCogSolid className="fs-1 text-white" />
           <br />
           Labs
         </Link>

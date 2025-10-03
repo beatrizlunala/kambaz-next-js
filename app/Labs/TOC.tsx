@@ -50,7 +50,7 @@ export default function TOC() {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={Link} href="/Labs/Lab2" active>
+        <Nav.Link as={Link} href="/Labs/Lab2">
           Lab 2
         </Nav.Link>
       </Nav.Item>

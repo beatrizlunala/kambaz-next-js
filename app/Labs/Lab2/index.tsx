@@ -13,9 +13,19 @@ import GridLayout from "./GridLayout";
 import Flex from "./Flex";
 import ReactIconsSampler from "./ReactIcons";
 
+import BootstrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapNavigation from "./BootstrapNavigation";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container } from "react-bootstrap";
+
 export default function Lab2() {
   return (
-    <div>
+    <Container>
       <h1>Lab 2</h1>
       <div id="wd-lab2">
         <h2>Lab 2 - Cascading Style Sheets</h2>
@@ -26,8 +36,15 @@ export default function Lab2() {
           Although it's very convenient it is considered bad practice and you
           should avoid using the style attribute
         </p>
+      </div>
+      <BootstrapGrids />
+      <ScreenSizeLabel />
+      <BootstrapTables />
+      <BootstrapLists />
+      <BootstrapForms />
+      <BootstrapNavigation />
 
-        <div id="wd-css-id-selectors">
+      {/* <div id="wd-css-id-selectors">
           <h3>ID selectors</h3>
 
           <p id="wd-id-selector-1">
@@ -88,7 +105,7 @@ export default function Lab2() {
       <Float />
       <GridLayout />
       <Flex />
-      <ReactIconsSampler />
-    </div>
+      <ReactIconsSampler /> */}
+    </Container>
   );
 }

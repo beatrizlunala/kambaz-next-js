@@ -4,6 +4,9 @@ export default function Labs() {
     <div id="wd-labs">
       <h1>Bea Luna</h1>
       <h2>Section 01</h2>
+      <h2>
+        <a href="https://github.com/beatrizlunala/kambaz-next-js">Github</a>
+      </h2>
       <h1>Labs</h1>
       <ul>
         <li>

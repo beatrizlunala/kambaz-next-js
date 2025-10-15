@@ -15,7 +15,8 @@ export default function CourseNavigation() {
         Modules
       </Link>
       <Link
-        href="/Courses/1234/Piazza"
+        href="https://piazza.com/class/mf1li76n4is6m/#"
+        target="_blank"
         className="list-group-item text-danger border-0"
       >
         Piazza

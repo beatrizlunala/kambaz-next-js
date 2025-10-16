@@ -1,0 +1,74 @@
+[
+  {
+    "_id": "A101",
+    "title": "Intro to HTML Assignment",
+    "course": "CS1234",
+    "availableDate": "2025-03-01",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A102",
+    "title": "Intro to CSS Assignment",
+    "course": "CS1234",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A103",
+    "title": "Intro to JavaScript Assignment",
+    "course": "CS1234",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A201",
+    "title": "Programming Basics Assignment",
+    "course": "CS2500",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A202",
+    "title": "Working in Pairs Assignment",
+    "course": "CS2500",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A203",
+    "title": "Lecture 1 in-class Activity",
+    "course": "CS2500",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A301",
+    "title": "Lab 1 Assignment",
+    "course": "CS2501",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A302",
+    "title": "Lab 1 Partner Assignment",
+    "course": "CS2501",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  },
+  {
+    "_id": "A303",
+    "title": "Basics of Partner Programming Assignment",
+    "course": "CS2501",
+    "availableDate": "2025-03-03",
+    "dueDate": "2025-03-13",
+    "points": "30"
+  }
+]

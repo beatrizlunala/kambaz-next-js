@@ -1,56 +1,34 @@
+"use client";
+
 import Link from "next/link";
+import { useParams, usePathname } from "next/navigation";
+
 export default function CourseNavigation() {
+  const { cid } = useParams();
+  const pathname = usePathname();
+  const links = [
+    "Home",
+    "Modules",
+    "Piazza",
+    "Zoom",
+    "Assignments",
+    "Quizzes",
+    "Grades",
+    "People",
+  ];
   return (
     <div className="wd list-group fs-5 rounded-0">
-      <Link
-        href="/Courses/1234/Home"
-        className="list-group-item active border-0"
-      >
-        Home
-      </Link>
-      <Link
-        href="/Courses/1234/Modules"
-        className="list-group-item text-danger border-0"
-      >
-        Modules
-      </Link>
-      <Link
-        href="https://piazza.com/class/mf1li76n4is6m/#"
-        target="_blank"
-        className="list-group-item text-danger border-0"
-      >
-        Piazza
-      </Link>
-      <Link
-        href="/Courses/1234/Zoom"
-        className="list-group-item text-danger border-0"
-      >
-        Zoom
-      </Link>
-      <Link
-        href="/Courses/1234/Assignments"
-        className="list-group-item text-danger border-0"
-      >
-        Assignments
-      </Link>
-      <Link
-        href="/Courses/1234/Quizzes"
-        className="list-group-item text-danger border-0"
-      >
-        Quizzes
-      </Link>
-      <Link
-        href="/Courses/1234/Grades"
-        className="list-group-item text-danger border-0"
-      >
-        Grades
-      </Link>
-      <Link
-        href="/Courses/1234/People/Table"
-        className="list-group-item text-danger border-0"
-      >
-        People
-      </Link>
+      {links.map((link) => (
+        <Link
+          key={link}
+          href={`/Courses/${cid}/${link}`}
+          className={`list-group-item border-0 ${
+            pathname.includes(link) ? "active" : "text-danger"
+          }`}
+        >
+          {link}
+        </Link>
+      ))}
     </div>
   );
 }

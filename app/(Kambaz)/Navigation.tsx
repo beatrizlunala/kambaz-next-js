@@ -1,11 +1,23 @@
-import Link from "next/link";
+"use client";
+
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function KambazNavigation() {
+  const pathname = usePathname();
+  const links = [
+    { label: "Dashboard", path: "/Kambaz/Dashboard", icon: AiOutlineDashboard },
+    { label: "Courses", path: "/Kambaz/Dashboard", icon: LiaBookSolid },
+    { label: "Calendar", path: "/Kambaz/Calendar", icon: IoCalendarOutline },
+    { label: "Inbox", path: "/Kambaz/Inbox", icon: FaInbox },
+    { label: "Labs", path: "/Labs", icon: LiaCogSolid },
+  ];
+
   return (
     <ListGroup
       className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
@@ -97,36 +109,5 @@ export default function KambazNavigation() {
         </Link>
       </ListGroupItem>
     </ListGroup>
-
-    // <div id="wd-kambaz-navigation">
-    //   <a href="https://www.northeastern.edu/" id="wd-neu-link" target="_blank">
-    //     Northeastern
-    //   </a>
-    //   <br />
-    //   <Link href="/Account" id="wd-account-link">
-    //     Account
-    //   </Link>
-    //   <br />
-    //   <Link href="/Dashboard" id="wd-dashboard-link">
-    //     Dashboard
-    //   </Link>
-    //   <br />
-    //   <Link href="/Courses" id="wd-course-link">
-    //     Courses
-    //   </Link>
-    //   <br />
-    //   <Link href="/Calendar" id="wd-calendar-link">
-    //     Calendar
-    //   </Link>
-    //   <br />
-    //   <Link href="/Inbox" id="wd-inbox-link">
-    //     Inbox
-    //   </Link>
-    //   <br />
-    //   <Link href="/Labs" id="wd-labs-link">
-    //     Labs
-    //   </Link>
-    //   <br />
-    // </div>
   );
 }

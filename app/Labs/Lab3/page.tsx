@@ -40,7 +40,9 @@ import Highlight from "./Highlight";
 
 import PathParameters from "./PathParameters";
 
-function Lab3() {
+export default function Lab3() {
+  console.log("Hello World!");
+
   return (
     <div>
       <h1>Lab 3</h1>
@@ -131,4 +133,3 @@ function Lab3() {
     </div>
   );
 }
-export default Lab3;

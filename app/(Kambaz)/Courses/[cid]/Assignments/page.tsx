@@ -1,14 +1,24 @@
+"use client";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { TfiWrite } from "react-icons/tfi";
-import GreenCheckmark from "./GreenCheckmark";
+
+import * as db from "../../../Database";
+import { useParams } from "next/navigation";
 
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import Link from "next/link";
 
 export default function Assignments() {
+  const { cid } = useParams();
+
+  // Filter assignments for this specific course
+  const assignments = db.assignments.filter(
+    (assignment: any) => assignment.course === cid
+  );
+
   return (
     <div id="wd-assignments">
       {/* Search and Action Buttons */}
@@ -47,71 +57,41 @@ export default function Assignments() {
 
           {/* Assignment Items */}
           <ListGroup className="rounded-0">
-            {/* A1 */}
-            <ListGroupItem className="p-3 ps-1 d-flex align-items-start wd-lesson">
-              <BsGripVertical className="me-2 fs-3 text-muted" />
-              <TfiWrite className="text-success me-3 fs-5 mt-1" />
-              <div className="flex-grow-1">
-                <Link
-                  href="/Courses/1234/Assignments/123"
-                  className="wd-assignment-link text-decoration-none text-dark fw-bold"
-                >
-                  A1
-                </Link>
-                <br />
-                <span className="text-danger">Multiple Modules</span> |{" "}
-                <strong>Not available until</strong> May 6 at 12:00am |
-                <br />
-                <strong>Due</strong> May 13 at 11:59pm | 100 pts
-              </div>
-              <div className="d-flex align-items-center">
-                <AssignmentControlButtons />
-              </div>
-            </ListGroupItem>
-
-            {/* A2 */}
-            <ListGroupItem className="p-3 ps-1 d-flex align-items-start wd-lesson">
-              <BsGripVertical className="me-2 fs-3 text-muted" />
-              <TfiWrite className="text-success me-3 fs-5 mt-1" />
-              <div className="flex-grow-1">
-                <Link
-                  href="/Courses/1234/Assignments/123"
-                  className="wd-assignment-link text-decoration-none text-dark fw-bold"
-                >
-                  A2
-                </Link>
-                <br />
-                <span className="text-danger">Multiple Modules</span> |{" "}
-                <strong>Not available until</strong> May 13 at 12:00am |
-                <br />
-                <strong>Due</strong> May 20 at 11:59pm | 100 pts
-              </div>
-              <div className="d-flex align-items-center">
-                <AssignmentControlButtons />
-              </div>
-            </ListGroupItem>
-
-            {/* A3 */}
-            <ListGroupItem className="p-3 ps-1 d-flex align-items-start wd-lesson">
-              <BsGripVertical className="me-2 fs-3 text-muted" />
-              <TfiWrite className="text-success me-3 fs-5 mt-1" />
-              <div className="flex-grow-1">
-                <Link
-                  href="/Courses/1234/Assignments/123"
-                  className="wd-assignment-link text-decoration-none text-dark fw-bold"
-                >
-                  A3
-                </Link>
-                <br />
-                <span className="text-danger">Multiple Modules</span> |{" "}
-                <strong>Not available until</strong> May 20 at 12:00am |
-                <br />
-                <strong>Due</strong> May 27 at 11:59pm | 100 pts
-              </div>
-              <div className="d-flex align-items-center">
-                <AssignmentControlButtons />
-              </div>
-            </ListGroupItem>
+            {assignments.map((assignment: any) => (
+              <ListGroupItem
+                key={assignment._id}
+                className="p-3 ps-1 d-flex align-items-start wd-lesson"
+              >
+                <BsGripVertical className="me-2 fs-3 text-muted" />
+                <TfiWrite className="text-success me-3 fs-5 mt-1" />
+                <div className="flex-grow-1">
+                  <Link
+                    href={`/Courses/${cid}/Assignments/${assignment._id}`}
+                    className="wd-assignment-link text-decoration-none text-dark fw-bold"
+                  >
+                    {assignment.title}
+                  </Link>
+                  <br />
+                  <span className="text-danger">Multiple Modules</span> |
+                  <strong> Not available until </strong>
+                  {new Date(assignment.availableDate).toLocaleDateString(
+                    "en-US",
+                    { month: "short", day: "numeric" }
+                  )}{" "}
+                  at 12:00am |
+                  <br />
+                  <strong>Due </strong>
+                  {new Date(assignment.dueDate).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  })}{" "}
+                  at 11:59pm | {assignment.points} pts
+                </div>
+                <div className="d-flex align-items-center">
+                  <AssignmentControlButtons />
+                </div>
+              </ListGroupItem>
+            ))}
           </ListGroup>
         </ListGroupItem>
       </ListGroup>

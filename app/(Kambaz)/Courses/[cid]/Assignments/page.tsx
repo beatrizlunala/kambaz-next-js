@@ -13,8 +13,6 @@ import Link from "next/link";
 
 export default function Assignments() {
   const { cid } = useParams();
-
-  // Filter assignments for this specific course
   const assignments = db.assignments.filter(
     (assignment: any) => assignment.course === cid
   );

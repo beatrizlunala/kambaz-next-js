@@ -15,26 +15,31 @@ import ChildStateComponent from "./ChildStateComponent";
 
 import ReduxExamples from "./ReduxExamples/page";
 
+import store from "./store";
+import { Provider } from "react-redux";
+
 export default function Lab4() {
   function sayHello() {
     alert("Hello");
   }
 
   return (
-    <div id="wd-lab1">
-      <h2>Lab 4</h2>
-      <ClickEvent />
-      <PassingDataOnEvent />
-      <PassingFunctions theFunction={sayHello} />
-      <EventObject />
-      <Counter />
-      <BooleanStateVariables />
-      <StringStateVariables />
-      <DateStateVariable />
-      <ObjectStateVariable />
-      <ArrayStateVariable />
-      <ParentStateComponent />
-      <ReduxExamples />
-    </div>
+    <Provider store={store}>
+      <div id="wd-lab1">
+        <h2>Lab 4</h2>
+        <ClickEvent />
+        <PassingDataOnEvent />
+        <PassingFunctions theFunction={sayHello} />
+        <EventObject />
+        <Counter />
+        <BooleanStateVariables />
+        <StringStateVariables />
+        <DateStateVariable />
+        <ObjectStateVariable />
+        <ArrayStateVariable />
+        <ParentStateComponent />
+        <ReduxExamples />
+      </div>
+    </Provider>
   );
 }

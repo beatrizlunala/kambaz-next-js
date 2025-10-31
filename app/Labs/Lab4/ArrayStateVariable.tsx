@@ -21,6 +21,7 @@ export default function ArrayStateVariable() {
         ))}
       </ListGroup>
       <hr />
+
       <button onClick={addElement}>Add Element</button>
       <ul>
         {array.map((item, index) => (

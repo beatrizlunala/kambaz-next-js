@@ -13,7 +13,9 @@ import ArrayStateVariable from "./ArrayStateVariable";
 import ParentStateComponent from "./ParentStateComponent";
 import ChildStateComponent from "./ChildStateComponent";
 
-import ReduxExamples from "./ReduxExamples/page";
+import ReduxExamples from "./ReduxExamples";
+
+import { RootState } from "./store";
 
 import store from "./store";
 import { Provider } from "react-redux";

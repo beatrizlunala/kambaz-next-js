@@ -6,23 +6,112 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
-import * as db from "../../../../Database";
-import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import * as client from "../client";
+import { setAssignments } from "../reducer";
 
 export default function AssignmentEditor() {
-  const { cid } = useParams();
+  const { cid, aid } = useParams();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
 
-  const assignments = db.assignments.filter(
-    (assignment: any) => assignment.course === cid
-  );
+  const isNew = aid === "new";
+  const assignment = isNew ? null : assignments.find((a: any) => a._id === aid);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [points, setPoints] = useState(100);
+  const [dueDate, setDueDate] = useState("");
+  const [availableDate, setAvailableDate] = useState("");
+  const [availableUntilDate, setAvailableUntilDate] = useState("");
+
+  const fetchAssignments = async () => {
+    const fetchedAssignments = await client.findAssignmentsForCourse(
+      cid as string
+    );
+    dispatch(setAssignments(fetchedAssignments));
+  };
+
+  useEffect(() => {
+    if (assignments.length === 0) {
+      fetchAssignments();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cid]);
+
+  useEffect(() => {
+    if (assignment) {
+      setTitle(assignment.title || "");
+      setDescription(assignment.description || "");
+      setPoints(assignment.points || 100);
+      setDueDate(
+        assignment.dueDate
+          ? new Date(assignment.dueDate).toISOString().slice(0, 16)
+          : ""
+      );
+      setAvailableDate(
+        assignment.availableDate
+          ? new Date(assignment.availableDate).toISOString().slice(0, 16)
+          : ""
+      );
+      setAvailableUntilDate(
+        assignment.availableUntilDate
+          ? new Date(assignment.availableUntilDate).toISOString().slice(0, 16)
+          : ""
+      );
+    }
+  }, [assignment]);
+
+  const handleSave = async () => {
+    const assignmentData = {
+      title,
+      description,
+      points: Number(points),
+      course: cid,
+      dueDate: dueDate ? new Date(dueDate).toISOString() : "",
+      availableDate: availableDate ? new Date(availableDate).toISOString() : "",
+      availableUntilDate: availableUntilDate
+        ? new Date(availableUntilDate).toISOString()
+        : "",
+    };
+
+    if (isNew) {
+      const newAssignment = await client.createAssignmentForCourse(
+        cid as string,
+        assignmentData
+      );
+      dispatch(setAssignments([...assignments, newAssignment]));
+    } else {
+      const updatedAssignment = await client.updateAssignment({
+        ...assignmentData,
+        _id: aid,
+      });
+      const newAssignments = assignments.map((a: any) =>
+        a._id === aid ? updatedAssignment : a
+      );
+      dispatch(setAssignments(newAssignments));
+    }
+    router.push(`/Courses/${cid}/Assignments`);
+  };
+
+  const handleCancel = () => {
+    router.push(`/Courses/${cid}/Assignments`);
+  };
 
   return (
     <div id="wd-assignments-editor" className="p-3">
       {/* Assignment Name */}
       <FormGroup className="mb-3">
         <Form.Label htmlFor="wd-name">Assignment Name</Form.Label>
-        <Form.Control type="text" id="wd-name" defaultValue="A1" />
+        <Form.Control
+          type="text"
+          id="wd-name"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
       </FormGroup>
 
       {/* Description */}
@@ -31,16 +120,8 @@ export default function AssignmentEditor() {
           as="textarea"
           id="wd-description"
           rows={10}
-          defaultValue={
-            "The assignment is available online\t\r\t\r" +
-            "Submit a link to the landing page of your Web application running on Netlify.\t\r\t\r" +
-            "The landing page should include the following:\t\r" +
-            "- Your full name and section\t\r" +
-            "- Links to each of the lab assignments\t\r" +
-            "- Link to the Kambaz application\t\r" +
-            "- Links to all relevant source code repositories\t\r" +
-            "The Kambaz application should include a link to navigate back to the landing page."
-          }
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
 
@@ -50,7 +131,12 @@ export default function AssignmentEditor() {
           Points
         </Form.Label>
         <Col sm={9}>
-          <Form.Control type="number" id="wd-points" defaultValue={100} />
+          <Form.Control
+            type="number"
+            id="wd-points"
+            value={points}
+            onChange={(e) => setPoints(Number(e.target.value))}
+          />
         </Col>
       </Form.Group>
 
@@ -175,7 +261,8 @@ export default function AssignmentEditor() {
               <Form.Control
                 type="datetime-local"
                 id="wd-due-date"
-                defaultValue="2024-05-13T23:59"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
               />
             </Form.Group>
 
@@ -189,7 +276,8 @@ export default function AssignmentEditor() {
                   <Form.Control
                     type="datetime-local"
                     id="wd-available-from"
-                    defaultValue="2024-05-06T00:00"
+                    value={availableDate}
+                    onChange={(e) => setAvailableDate(e.target.value)}
                   />
                 </Form.Group>
               </Col>
@@ -199,7 +287,8 @@ export default function AssignmentEditor() {
                   <Form.Control
                     type="datetime-local"
                     id="wd-available-until"
-                    defaultValue="2024-05-20T23:59"
+                    value={availableUntilDate}
+                    onChange={(e) => setAvailableUntilDate(e.target.value)}
                   />
                 </Form.Group>
               </Col>
@@ -211,8 +300,12 @@ export default function AssignmentEditor() {
       {/* Action Buttons */}
       <hr />
       <div className="d-flex justify-content-end gap-2">
-        <Button variant="secondary">Cancel</Button>
-        <Button variant="danger">Save</Button>
+        <Button variant="secondary" onClick={handleCancel}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={handleSave}>
+          Save
+        </Button>
       </div>
     </div>
   );

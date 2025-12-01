@@ -3,7 +3,7 @@ import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
-import { useState } from "react"; // Add this line!
+import { useState } from "react";
 
 import ModuleEditor from "./ModuleEditor";
 

@@ -108,7 +108,7 @@ export default function Dashboard() {
   // Filter courses based on showAllCourses toggle
   const displayedCourses = showAllCourses
     ? courses
-    : courses.map((course: any) => isEnrolled(course._id));
+    : courses.filter((course: any) => isEnrolled(course._id));
 
   return (
     <div id="wd-dashboard">
@@ -170,7 +170,7 @@ export default function Dashboard() {
               <Col
                 className="wd-dashboard-course"
                 style={{ width: "300px" }}
-                key={course._id}
+                key={course.number || course._id}
               >
                 <Card>
                   <Link

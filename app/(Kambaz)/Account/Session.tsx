@@ -10,7 +10,12 @@ export default function Session({ children }: { children: any }) {
       const currentUser = await client.profile();
       dispatch(setCurrentUser(currentUser));
     } catch (err: any) {
-      console.error(err);
+      // It's OK if there's no logged-in user yet (401 from /profile)
+      if (err?.response?.status === 401) {
+        dispatch(setCurrentUser(null));
+      } else {
+        console.error(err);
+      }
     }
     setPending(false);
   };

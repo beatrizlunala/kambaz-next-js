@@ -2,7 +2,9 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { useState, useEffect } from "react";
+import { deleteAssignment, setAssignments } from "./reducer";
+import * as client from "./client";
 import Button from "react-bootstrap/Button";
 import { FaTrash } from "react-icons/fa";
 
@@ -13,15 +15,32 @@ export default function Assignments() {
 
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
 
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cid]);
+
   const courseAssignments = assignments.filter(
     (assignment: any) => assignment.course === cid
   );
 
-  const handleDelete = (assignmentId: string, assignmentTitle: string) => {
+  const handleDelete = async (
+    assignmentId: string,
+    assignmentTitle: string
+  ) => {
     if (
       window.confirm(`Are you sure you want to remove "${assignmentTitle}"?`)
     ) {
-      dispatch(deleteAssignment(assignmentId));
+      await client.deleteAssignment(assignmentId);
+      const newAssignments = assignments.filter(
+        (a: any) => a._id !== assignmentId
+      );
+      dispatch(setAssignments(newAssignments));
     }
   };
 

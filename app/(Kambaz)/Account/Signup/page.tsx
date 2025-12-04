@@ -31,10 +31,10 @@ export default function Signup() {
         type="password"
         onChange={(e) => setUser({ ...user, password: e.target.value })}
       />
-      <button className="btn btn-primary w-100" onClick={signup}>
+      <Button className="btn btn-primary w-100" onClick={signup}>
         {" "}
         Sign up{" "}
-      </button>
+      </Button>
       <br />
       <Link href="/Account/Signin">Sign in</Link>
     </div>

@@ -32,12 +32,12 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const [course, setCourse] = useState<any>({
     _id: "0",
-    name: "New Course",
+    name: "",
     number: "New Number",
     startDate: "2023-09-10",
     endDate: "2023-12-15",
-    image: "/images/reactjs.jpg",
-    description: "New Description",
+    image: "/images/reactjs.png",
+    description: "",
   });
 
   const [showAllCourses, setShowAllCourses] = useState(false);
@@ -47,15 +47,21 @@ export default function Dashboard() {
 
   const fetchCourses = async () => {
     try {
-      const courses = await client.findMyCourses();
+      let courses;
+      if (showAllCourses) {
+        courses = await client.fetchAllCourses();
+      } else {
+        courses = await client.findMyCourses();
+      }
       dispatch(setCourses(courses));
     } catch (error) {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchCourses();
-  }, [currentUser]);
+  }, [currentUser, showAllCourses]);
 
   const onAddNewCourse = async () => {
     const newCourse = await client.createCourse(course);
@@ -127,24 +133,28 @@ export default function Dashboard() {
       {currentUser?.role === "FACULTY" && (
         <>
           <h5>
-            New Course
-            <button
+            New Course{" "}
+            <Button
               className="btn btn-primary float-end"
               id="wd-add-new-course-click"
               onClick={onAddNewCourse}
             >
               Add
-            </button>
-            <button onClick={onUpdateCourse}>Update</button>
+            </Button>
+            <Button onClick={onUpdateCourse}>Update</Button>
           </h5>
           <br />
           <FormControl
             value={course.name}
+            placeholder="New Course"
+            id="new-course-name"
             className="mb-2"
             onChange={(e) => setCourse({ ...course, name: e.target.value })}
           />
           <FormControl
             value={course.description}
+            placeholder="New Description"
+            id="new-course-description"
             as="textarea"
             rows={3}
             onChange={(e) =>
@@ -170,17 +180,15 @@ export default function Dashboard() {
               <Col
                 className="wd-dashboard-course"
                 style={{ width: "300px" }}
-                key={course.number || course._id}
+                key={course._id}
               >
                 <Card>
                   <Link
                     href={`/Courses/${course._id}/Home`}
                     className="wd-dashboard-course-link text-decoration-none text-dark"
                     onClick={(e) => {
-                      // Prevent navigation if not enrolled
                       if (!enrolled && currentUser?.role !== "FACULTY") {
                         e.preventDefault();
-                        alert("You must enroll in this course to access it.");
                       }
                     }}
                   >
@@ -214,7 +222,9 @@ export default function Dashboard() {
 
                       {currentUser?.role === "FACULTY" && (
                         <>
-                          <button
+                          {" "}
+                          <Button
+                            variant="danger"
                             onClick={(event) => {
                               event.preventDefault();
                               onDeleteCourse(course._id);
@@ -222,8 +232,8 @@ export default function Dashboard() {
                           >
                             {" "}
                             Delete{" "}
-                          </button>
-                          <button
+                          </Button>
+                          <Button
                             id="wd-edit-course-click"
                             onClick={(event) => {
                               event.preventDefault();
@@ -232,12 +242,12 @@ export default function Dashboard() {
                             className="btn btn-warning me-2 float-end"
                           >
                             Edit
-                          </button>
+                          </Button>
                         </>
                       )}
 
                       {currentUser?.role === "STUDENT" && showAllCourses && (
-                        <button
+                        <Button
                           onClick={(event) => {
                             event.preventDefault();
                             handleEnrollment(course._id);
@@ -247,7 +257,7 @@ export default function Dashboard() {
                           } float-end`}
                         >
                           {enrolled ? "Unenroll" : "Enroll"}
-                        </button>
+                        </Button>
                       )}
                     </CardBody>
                   </Link>

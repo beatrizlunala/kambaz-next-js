@@ -1,5 +1,9 @@
 import axios from "axios";
-const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
+const HTTP_SERVER =
+  process.env.NEXT_PUBLIC_HTTP_SERVER || "http://localhost:4000";
+if (!HTTP_SERVER.startsWith("http")) {
+  console.error("NEXT_PUBLIC_HTTP_SERVER must start with http:// or https://");
+}
 const COURSES_API = `${HTTP_SERVER}/api/courses`;
 const ASSIGNMENTS_API = `${HTTP_SERVER}/api/assignments`;
 

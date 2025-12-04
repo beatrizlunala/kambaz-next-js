@@ -17,15 +17,19 @@ export default function Signin() {
     dispatch(setCurrentUser(user));
     redirect("/Dashboard");
   };
-
   return (
     <div id="wd-signin-screen">
       <h1>Sign in</h1>
+
       <FormControl
         defaultValue={credentials.username}
         onChange={(e) =>
           setCredentials({ ...credentials, username: e.target.value })
         }
+        className="mb-2"
+        placeholder="username"
+        type="username"
+        id="wd-username"
       />
 
       <FormControl

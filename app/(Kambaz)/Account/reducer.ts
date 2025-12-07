@@ -1,7 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+// Define the User interface
+interface User {
+  _id: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  dob: string;
+  role: string;
+}
+
+// Define the state interface
+interface AccountState {
+  currentUser: User | null;
+}
+
+const initialState: AccountState = {
   currentUser: null,
 };
+
 const accountSlice = createSlice({
   name: "account",
   initialState,

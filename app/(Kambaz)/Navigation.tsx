@@ -46,6 +46,9 @@ export default function KambazNavigation() {
           Account
         </Link>
       </ListGroupItem>
+
+      {/* figure out how to make bg-white change */}
+      {/* Dashboard */}
       <ListGroupItem
         className="border-0
                   bg-white text-center"
@@ -56,7 +59,7 @@ export default function KambazNavigation() {
           Dashboard
         </Link>
       </ListGroupItem>
-      <br />
+
       {/* Courses */}
       <ListGroupItem className="border-0 bg-black text-center">
         <Link

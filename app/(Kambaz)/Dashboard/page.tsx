@@ -31,13 +31,13 @@ import {
 export default function Dashboard() {
   const dispatch = useDispatch();
   const [course, setCourse] = useState<any>({
-    _id: "0",
-    name: "",
-    number: "New Number",
-    startDate: "2023-09-10",
-    endDate: "2023-12-15",
-    image: "/images/reactjs.png",
-    description: "",
+    // _id: "0",
+    // name: "",
+    // number: "New Number",
+    // startDate: "2023-09-10",
+    // endDate: "2023-12-15",
+    // image: "/images/reactjs.png",
+    // description: "",
   });
 
   const [showAllCourses, setShowAllCourses] = useState(false);

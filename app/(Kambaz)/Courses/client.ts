@@ -92,3 +92,35 @@ export const updateAssignment = async (assignment: any) => {
   );
   return data;
 };
+
+export const findUsersForCourse = async (courseId: string) => {
+  const response = await axios.get(`${COURSES_API}/${courseId}/users`);
+  return response.data;
+};
+
+// Handling user enrollment
+export const enrollIntoCourse = async (userId: string, courseId: string) => {
+  const usersInCourse = await axios.get(`${COURSES_API}/${courseId}/users`);
+
+  if (usersInCourse.data.some((user: any) => user._id === userId)) {
+    const s = await axiosWithCredentials.get(`${USERS_API}/${userId}/courses`);
+    return s.data;
+  } else {
+    const response = await axiosWithCredentials.post(
+      `${USERS_API}/${userId}/courses/${courseId}`
+    );
+    const newUserEnrollments = await axiosWithCredentials.get(
+      `${USERS_API}/${userId}/courses`
+    );
+    return newUserEnrollments.data;
+  }
+};
+export const unenrollFromCourse = async (userId: string, courseId: string) => {
+  const response = await axiosWithCredentials.delete(
+    `${USERS_API}/${userId}/courses/${courseId}`
+  );
+  const newUserEnrollments = await axiosWithCredentials.get(
+    `${USERS_API}/${userId}/courses`
+  );
+  return newUserEnrollments.data;
+};

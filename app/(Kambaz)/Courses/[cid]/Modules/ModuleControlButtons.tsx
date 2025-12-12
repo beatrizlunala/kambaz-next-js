@@ -27,8 +27,8 @@ export default function ModuleControlButtons({
         onClick={() => deleteModule(moduleId)}
       />
       <GreenCheckmark />
-      <FaPlus className="fs-1" />
-      <BsThreeDotsVertical className="fs-4" />
+      <FaPlus className="text-primary me-3" />
+      <BsThreeDotsVertical className="text-primary me-3" />
     </div>
   );
 }

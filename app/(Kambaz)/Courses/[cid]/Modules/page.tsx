@@ -33,7 +33,7 @@ export default function Modules() {
   };
   useEffect(() => {
     fetchModules();
-  }, []);
+  }, [cid]);
 
   const onCreateModuleForCourse = async () => {
     if (!cid) return;
@@ -41,25 +41,21 @@ export default function Modules() {
     const newModule = { name: moduleName, course: cid };
 
     const module = await client.createModuleForCourse(cid as string, newModule);
+    // const module = await client.createModuleForCourse(cid as string);
 
     dispatch(setModules([...modules, module]));
   };
 
   const onRemoveModule = async (moduleId: string) => {
     await client.deleteModule(moduleId);
-
-    const newModules = modules.filter((m: any) => m._id !== moduleId);
-
-    dispatch(setModules(newModules));
+    dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
   };
 
   const onUpdateModule = async (module: any) => {
     await client.updateModule(module);
-
     const newModules = modules.map((m: any) =>
       m._id === module._id ? module : m
     );
-
     dispatch(setModules(newModules));
   };
 

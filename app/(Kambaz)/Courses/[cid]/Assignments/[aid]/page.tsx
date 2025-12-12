@@ -27,6 +27,7 @@ export default function AssignmentEditor() {
   const [dueDate, setDueDate] = useState("");
   const [availableDate, setAvailableDate] = useState("");
   const [availableUntilDate, setAvailableUntilDate] = useState("");
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   const fetchAssignments = async () => {
     const fetchedAssignments = await client.findAssignmentsForCourse(
@@ -297,16 +298,20 @@ export default function AssignmentEditor() {
         </Col>
       </Form.Group>
 
-      {/* Action Buttons */}
-      <hr />
-      <div className="d-flex justify-content-end gap-2">
-        <Button variant="secondary" onClick={handleCancel}>
-          Cancel
-        </Button>
-        <Button variant="danger" onClick={handleSave}>
-          Save
-        </Button>
-      </div>
+      {currentUser?.role === "FACULTY" && (
+        <>
+          {/* Action Buttons */}
+          <hr />
+          <div className="d-flex justify-content-end gap-2">
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={handleSave}>
+              Save
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

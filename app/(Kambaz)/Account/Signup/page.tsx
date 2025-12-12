@@ -5,8 +5,9 @@ import { redirect } from "next/dist/client/components/navigation";
 import { setCurrentUser } from "../reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { FormControl, Button } from "react-bootstrap";
+import { FormControl, Button, FormSelect } from "react-bootstrap";
 import * as client from "../client";
+import { profile } from "../client";
 
 export default function Signup() {
   const [user, setUser] = useState<any>({});
@@ -23,14 +24,19 @@ export default function Signup() {
     <div className="wd-signup-screen">
       <h1>Sign up</h1>
       <FormControl
-        value={user.username}
+        // value={user.username}
         onChange={(e) => setUser({ ...user, username: e.target.value })}
       />
       <FormControl
-        value={user.password}
+        // value={user.password}
         type="password"
         onChange={(e) => setUser({ ...user, password: e.target.value })}
       />
+      <FormSelect id="wd-submission-type" defaultValue="USER" className="mb-3">
+        <option value="User">USER</option>
+        <option value="Faculty">FACULTY</option>
+        <option value="Student">STUDENT</option>
+      </FormSelect>
       <Button className="btn btn-primary w-100" onClick={signup}>
         {" "}
         Sign up{" "}

@@ -4,6 +4,7 @@ import GreenCheckmark from "./GreenCheckmark";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import ModuleEditor from "./ModuleEditor";
 
@@ -19,42 +20,52 @@ export default function ModulesControls({
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   return (
     <div id="wd-modules-controls" className="text-nowrap">
-      <Button
-        variant="danger"
-        size="lg"
-        className="me-1 float-end"
-        onClick={handleShow}
-      >
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Module
-      </Button>
-      <Dropdown className="float-end me-2">
-        <Dropdown.Toggle variant="secondary" size="lg">
-          <GreenCheckmark />
-          Publish All
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item>
-            <GreenCheckmark />
-            Publish All
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <GreenCheckmark />
-            Publish all modules and items
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-      <ModuleEditor
-        show={show}
-        handleClose={handleClose}
-        dialogTitle="Add Module"
-        moduleName={moduleName}
-        setModuleName={setModuleName}
-        addModule={addModule}
-      />
+      {currentUser?.role === "FACULTY" && (
+        <>
+          (
+          <Button
+            variant="danger"
+            size="lg"
+            className="me-1 float-end"
+            onClick={handleShow}
+          >
+            <FaPlus
+              className="position-relative me-2"
+              style={{ bottom: "1px" }}
+            />
+            Module
+          </Button>
+          <Dropdown className="float-end me-2">
+            <Dropdown.Toggle variant="secondary" size="lg">
+              <GreenCheckmark />
+              Publish All
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <GreenCheckmark />
+                Publish All
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <GreenCheckmark />
+                Publish all modules and items
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <ModuleEditor
+            show={show}
+            handleClose={handleClose}
+            dialogTitle="Add Module"
+            moduleName={moduleName}
+            setModuleName={setModuleName}
+            addModule={addModule}
+          />
+          )
+        </>
+      )}
     </div>
   );
 }

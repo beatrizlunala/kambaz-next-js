@@ -25,8 +25,18 @@ const coursesSlice = createSlice({
     setCourses: (state, { payload: courses }) => {
       state.courses = courses;
     },
+    findCoursesForEnrolledUser: (state, { payload: userId }) => {
+      state.courses = state.courses.filter((course: any) =>
+        course.enrolledUsers?.includes(userId)
+      ) as any;
+    },
   },
 });
-export const { addNewCourse, deleteCourse, updateCourse, setCourses } =
-  coursesSlice.actions;
+export const {
+  addNewCourse,
+  deleteCourse,
+  updateCourse,
+  setCourses,
+  findCoursesForEnrolledUser,
+} = coursesSlice.actions;
 export default coursesSlice.reducer;

@@ -1,0 +1,25 @@
+[
+  {
+    "_id": "Q101",
+    "title": "Example Quiz",
+    "courseId": "CS1234",
+    "description": "Graded Quiz",
+    "quizType": "Graded Quiz",
+    "points": 30,
+    "assignmentGroup": "Quizzes",
+    "shuffleAnswers": "true",
+    "timeLimitMinutes": 20,
+    "multipleAttempts": "false",
+    "howManyAttempts": 1,
+    "showCorrectAnswers": "Immediately",
+    "accessCode": "",
+    "oneQuestionAtATime": "true",
+    "webcamRequired": "false",
+    "lockQuestionsAfterAnswering": "false",
+    "dueDate": "2025-12-31",
+    "availableDate": "2025-12-11",
+    "untilDate": "2025-12-31",
+    "published": "true",
+    "questions": 1
+  }
+]

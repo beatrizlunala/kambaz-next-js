@@ -58,6 +58,7 @@ export default function Profile() {
             id="wd-firstname"
             className="mb-2"
             defaultValue={profile.firstName}
+            placeholder="First Name"
             onChange={(e) =>
               setProfile({ ...profile, firstName: e.target.value })
             }
@@ -65,6 +66,7 @@ export default function Profile() {
           <FormControl
             id="wd-lastname"
             className="mb-2"
+            placeholder="Last Name"
             defaultValue={profile.lastName}
             onChange={(e) =>
               setProfile({ ...profile, lastName: e.target.value })
@@ -79,6 +81,7 @@ export default function Profile() {
           />
           <FormControl
             id="wd-email"
+            placeholder="Email"
             className="mb-2"
             defaultValue={profile.email}
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
@@ -86,6 +89,7 @@ export default function Profile() {
           <select
             className="form-control mb-2"
             id="wd-role"
+            value={profile.role}
             onChange={(e) => setProfile({ ...profile, role: e.target.value })}
           >
             <option value="USER">User</option>

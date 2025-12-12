@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Form, Row, Col, InputGroup, Button, Nav } from "react-bootstrap";

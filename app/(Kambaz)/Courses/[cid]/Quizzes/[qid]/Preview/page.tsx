@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -975,7 +974,7 @@ export default function QuizPreviewPage() {
             </Button>
           )}
 
-          {/* STAFF (Faculty / TA) preview button */}
+          {/* FACULTY AND TA PREVIEW */}
           {isStaffPreview && (
             <Button
               variant="danger"
@@ -986,7 +985,7 @@ export default function QuizPreviewPage() {
             </Button>
           )}
 
-          {/* STUDENT buttons */}
+          {/* STUDENT */}
           {isStudent && mode === "VIEW_LAST_ATTEMPT" && (
             <>
               {attemptsCount > 0 && scoreSummary && (

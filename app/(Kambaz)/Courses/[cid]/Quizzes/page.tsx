@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -19,13 +18,14 @@ import * as client from "./client";
 import { setQuizzes, addQuiz, updateQuiz, deleteQuiz, Quiz } from "./reducer";
 import RocketIcon from "./RocketIcon";
 import { IoMdArrowDropdown } from "react-icons/io";
+import GreenCheckmark from "../Assignments/GreenCheckmark";
 
+// FORMATTING DATES
 const ordinal = (n: number) => {
   const s = ["th", "st", "nd", "rd"],
     v = n % 100;
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 };
-
 const prettyDate = (iso?: string | null, timeLabel?: string) => {
   if (!iso) return "";
   const d = new Date(iso);
@@ -34,6 +34,7 @@ const prettyDate = (iso?: string | null, timeLabel?: string) => {
   return `${month} ${day}${timeLabel ? ` at ${timeLabel}` : ""}`;
 };
 
+// DISPLAY IF THE QUIZ IS AVAILABLE OR NOT
 const availabilityStatus = (quiz: Quiz) => {
   const now = new Date();
   const from = quiz.availableFrom ? new Date(quiz.availableFrom) : null;
@@ -54,6 +55,7 @@ const availabilityStatus = (quiz: Quiz) => {
 type RootState = any;
 
 export default function QuizzesPage() {
+  //CONSTS
   const router = useRouter();
   const { cid } = useParams<{ cid: string }>();
   const dispatch = useDispatch();
@@ -72,6 +74,7 @@ export default function QuizzesPage() {
     "DEFAULT" | "TITLE" | "DUE" | "AVAILABLE"
   >("DEFAULT");
 
+  // USE __'S
   useEffect(() => {
     const load = async () => {
       if (!cid) return;
@@ -107,10 +110,11 @@ export default function QuizzesPage() {
                 )) ?? [];
               if (Array.isArray(attempts) && attempts.length > 0) {
                 const sorted = [...attempts].sort(
-                  (a: any, b: any) =>
-                    (a.attemptNumber ?? 0) - (b.attemptNumber ?? 0) ||
-                    new Date(a.submittedAt).getTime() -
-                      new Date(b.submittedAt).getTime()
+                  (oneQuiz: any, anotherQuiz: any) =>
+                    (oneQuiz.attemptNumber ?? 0) -
+                      (anotherQuiz.attemptNumber ?? 0) ||
+                    new Date(oneQuiz.submittedAt).getTime() -
+                      new Date(anotherQuiz.submittedAt).getTime()
                 );
                 const last = sorted[sorted.length - 1];
                 summaries[quiz._id] = {
@@ -139,11 +143,12 @@ export default function QuizzesPage() {
   const sortedQuizzes: Quiz[] = useMemo(() => {
     const all = Array.isArray(quizzes) ? quizzes.filter(Boolean) : [];
 
-    // ⭐ STUDENT FILTER: students only see published quizzes
+    // STUDENTS ONLY SEE PUBLISHED QUIZZES
     const visible = isStudent ? all.filter((q) => q && q.published) : all;
 
     const list = [...visible];
 
+    // SORTING LOGIC
     if (sortBy === "TITLE") {
       return list.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
@@ -172,13 +177,15 @@ export default function QuizzesPage() {
     return list;
   }, [quizzes, sortBy, isStudent]);
 
+  // ONLY FACULTY CAN ADD QUIZZES
   const handleAddQuiz = async () => {
     if (!cid || !isFaculty) return;
 
+    // EMPTY QUIZ
     const defaultQuiz: Partial<Quiz> = {
       title: "New Quiz",
       course: cid,
-      description: "",
+      description: "New Description",
       points: 10,
       published: false,
       quizType: "Graded Quiz",
@@ -200,13 +207,13 @@ export default function QuizzesPage() {
     try {
       const created = await client.createQuizForCourse(cid, defaultQuiz);
       dispatch(addQuiz(created));
-      // faculty goes straight to editor for the new quiz
       router.push(`/Courses/${cid}/Quizzes/${created._id}/Edit`);
     } catch (e) {
       console.error("Failed to create quiz:", e);
     }
   };
 
+  // KEBAB MENU/DROPDOWN HANDLERS
   const handleDeleteQuiz = async (quizId: string) => {
     try {
       await client.deleteQuiz(quizId);
@@ -215,7 +222,6 @@ export default function QuizzesPage() {
       console.error("Failed to delete quiz:", e);
     }
   };
-
   const handleTogglePublish = async (quiz: Quiz) => {
     try {
       const updatedPayload = { ...quiz, published: !quiz.published };
@@ -229,8 +235,12 @@ export default function QuizzesPage() {
   return (
     <div id="wd-quizzes">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Quizzes</h2>
+        <h2>
+          {cid}
+          {"  "} Quizzes
+        </h2>
 
+        {/* CONTROL BUTTONS FOR FACULTY/TA */}
         {(isFaculty || currentUser?.role === "TA") && (
           <div className="d-flex gap-2">
             <DropdownButton
@@ -245,7 +255,6 @@ export default function QuizzesPage() {
                   ? "Due Date"
                   : "Available Date"
               }`}
-              size="sm"
             >
               <Dropdown.Item onClick={() => setSortBy("DEFAULT")}>
                 Default order
@@ -263,7 +272,6 @@ export default function QuizzesPage() {
 
             <Button
               variant="danger"
-              size="sm"
               id="wd-add-quiz"
               onClick={handleAddQuiz}
               className="d-inline-flex align-items-center"
@@ -274,20 +282,19 @@ export default function QuizzesPage() {
         )}
       </div>
 
-      {sortedQuizzes.length === 0 && (
-        <p className="text-muted">
-          {isStudent
-            ? "No published quizzes are available yet."
-            : "No quizzes yet. Click “+ Quiz” to add one."}
-        </p>
-      )}
+      {/* EMPTY STATE */}
+      {sortedQuizzes.length === 0 && <p className="text-muted">No quizzes.</p>}
 
+      {/* NORMAL STATE */}
       {sortedQuizzes.length > 0 && (
-        <ListGroup className="rounded-0" id="wd-quizzes-list">
+        <ListGroup id="wd-quizzes-list">
           <ListGroupItem className="wd-title p-3 ps-2 bg-secondary">
-            <IoMdArrowDropdown className="me-2 fs-3" /> Assignment Quizzes
+            <div className="wd-title p-3 ps-2 bg-secondary">
+              <IoMdArrowDropdown className="me-2 fs-3" /> Assignment Quizzes
+            </div>
           </ListGroupItem>
 
+          {/* QUIZZES */}
           {sortedQuizzes.map((quiz, index) => {
             if (!quiz) return null;
 
@@ -317,13 +324,13 @@ export default function QuizzesPage() {
                           onClick={() => handleTogglePublish(quiz)}
                           className="me-1"
                         >
-                          {quiz.published ? "✅" : "🚫"}
+                          {quiz.published ? <GreenCheckmark /> : "🚫"}
                         </span>
                       )}
 
                       {!isFaculty && (
                         <span className="me-1">
-                          {quiz.published ? "✅" : "🚫"}
+                          {quiz.published ? <GreenCheckmark /> : "🚫"}
                         </span>
                       )}
 
@@ -361,13 +368,12 @@ export default function QuizzesPage() {
                     </div>
                   </div>
 
-                  {/* Context menu only for faculty */}
+                  {/* FACULTY KEBAB MENU/DROPDOWN */}
                   {isFaculty && (
                     <div className="col-auto">
                       <Dropdown align="end">
                         <Dropdown.Toggle
                           variant="light"
-                          size="sm"
                           id={`wd-quiz-actions-${key}`}
                           className="border-0"
                         >

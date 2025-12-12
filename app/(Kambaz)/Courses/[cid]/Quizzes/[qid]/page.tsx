@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -209,10 +208,7 @@ export default function QuizDetailsPage() {
               </Button>
             )}
 
-            {/* Start Quiz:
-                - shown if no attempts yet
-                - or if there are attempts left
-                - hidden if out of attempts */}
+            {/* START QUIZ LOGIC: SHOWN IF USER HAS ATTEMPTS LEFT */}
             {attemptsInfo ? (
               !outOfAttempts && (
                 <Button
@@ -225,7 +221,7 @@ export default function QuizDetailsPage() {
                 </Button>
               )
             ) : (
-              // While attempts are loading, show disabled Start button
+              // WHILE ATTEMPTS LOAD
               <Button variant="primary" id="wd-start-quiz" disabled>
                 {loadingAttempts ? "Loading..." : "Start Quiz"}
               </Button>
